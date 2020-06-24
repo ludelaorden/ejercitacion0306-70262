@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 
+
 import { RouterModule } from '@angular/router';
 import { APP_BASE_HREF} from '@angular/common';  
 import { ReactiveFormsModule } from "@angular/forms";
@@ -20,6 +21,7 @@ import { ArticulosComponent } from "./components/articulos/articulos.component";
 import { ArticulosFamiliasComponent } from "./components/articulos-familias/articulos-familias.component";
 import { ModalDialogComponent } from "./components/modal-dialog/modal-dialog.component";
 import { EmpresasComponent } from './components/empresas/empresas.component';
+import { EmpresasService } from './services/empresas.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { EmpresasComponent } from './components/empresas/empresas.component';
       { path: '', redirectTo: '/inicio', pathMatch: 'full' },
       { path: 'inicio', component: InicioComponent },
       { path: 'articulos', component: ArticulosComponent },
-      { path: 'articulosfamilias', component: ArticulosFamiliasComponent }
+      { path: 'articulosfamilias', component: ArticulosFamiliasComponent },
+      { path: 'empresas',component:EmpresasComponent }
     ]),
     NgbPaginationModule,
     NgbModalModule,
@@ -47,7 +50,7 @@ import { EmpresasComponent } from './components/empresas/empresas.component';
   entryComponents: [ModalDialogComponent],
   providers: [
      {provide: APP_BASE_HREF, useValue : '/' },
-    { provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true, providers: [EmpresasService] }
   ],
   bootstrap: [AppComponent]
 })
